@@ -1,11 +1,14 @@
 package wxgaly.android.imdemo
 
+import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.text.TextUtils
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.android.api.callback.GetUserInfoCallback
+import cn.jpush.im.android.api.model.UserInfo
 import cn.jpush.im.api.BasicCallback
 import com.dd.processbutton.iml.ActionProcessButton
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,11 +26,12 @@ class MainActivity : AppCompatActivity() {
         JMessageClient.init(this)
 
         initListener()
+
     }
 
     private fun initListener() {
 
-        btn_register.setOnClickListener { view ->
+        btn_register.setOnClickListener { _ ->
             if (!TextUtils.isEmpty(et_username.text) && !TextUtils.isEmpty(et_password.text)) {
                 username = et_username.text.toString().trim()
                 password = et_password.text.toString().trim()
@@ -43,7 +47,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun registerIM() {
         btn_register.progress = 1
-        JMessageClient.register(username, password, JMessageRegisterCallback(btn_register, this))
+//        JMessageClient.register(username, password, JMessageRegisterCallback(btn_register, this))
+        JMessageClient.login(username, password, JMessageRegisterCallback(btn_register, this))
+        JMessageClient.getUserInfo(username, JMessageLoginCallback(this))
+    }
+
+    open class JMessageLoginCallback(private val context: Context) : GetUserInfoCallback() {
+        override fun gotResult(code: Int, message: String?, userInfo: UserInfo?) {
+
+            Toast.makeText(context, "code is $code and message is $message, userInfo is " +
+                    "${userInfo?.displayName}",
+                    Toast.LENGTH_SHORT).show()
+        }
+
     }
 
     open class JMessageRegisterCallback(private val button: ActionProcessButton?, private val
