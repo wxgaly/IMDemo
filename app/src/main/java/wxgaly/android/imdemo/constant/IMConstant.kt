@@ -7,6 +7,7 @@ import android.provider.BaseColumns
  */
 
 object IMConstant {
+
     /* Inner class that defines the table contents */
     object UuserEntry : BaseColumns {
         const val TABLE_NAME = "user_info"
@@ -14,6 +15,10 @@ object IMConstant {
         const val COLUMN_NAME_USERNAME = "username"
         const val COLUMN_NAME_PASSWORD = "password"
         const val COLUMN_NAME_LOGTYPE = "loginType"
+    }
+
+    enum class LoginType{
+        LOGIN, LOGOUT, NOT_LOGIN
     }
 }
 
