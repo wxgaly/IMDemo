@@ -24,12 +24,21 @@ public class UserInfo {
     @Property(nameInDb = "loginType")
     private int loginType;
 
-    @Generated(hash = 2125976427)
-    public UserInfo(long id, String username, String password, int loginType) {
+    @Property(nameInDb = "isCurrent")
+    private boolean isCurrent;
+
+    @Property(nameInDb = "loginTime")
+    private long loginTime;
+
+    @Generated(hash = 136897355)
+    public UserInfo(long id, String username, String password, int loginType,
+            boolean isCurrent, long loginTime) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.loginType = loginType;
+        this.isCurrent = isCurrent;
+        this.loginTime = loginTime;
     }
 
     @Generated(hash = 1279772520)
@@ -66,6 +75,22 @@ public class UserInfo {
 
     public void setLoginType(int loginType) {
         this.loginType = loginType;
+    }
+
+    public boolean getIsCurrent() {
+        return this.isCurrent;
+    }
+
+    public void setIsCurrent(boolean isCurrent) {
+        this.isCurrent = isCurrent;
+    }
+
+    public long getLoginTime() {
+        return this.loginTime;
+    }
+
+    public void setLoginTime(long loginTime) {
+        this.loginTime = loginTime;
     }
 
 }

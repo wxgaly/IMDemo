@@ -9,12 +9,14 @@ buildscript {
     ext.greendao_version = '3.2.2'
     repositories {
         google()
-        maven {
-            url LOCAL_REPO_RELEASE_URL
-        }
+        mavenCentral()
+        jcenter()
+//        maven {
+//            url LOCAL_REPO_RELEASE_URL
+//        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-rc2'
+        classpath 'com.android.tools.build:gradle:3.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.greenrobot:greendao-gradle-plugin:$greendao_version"
 
@@ -26,9 +28,11 @@ buildscript {
 allprojects {
     repositories {
         google()
-        maven {
-            url LOCAL_REPO_RELEASE_URL
-        }
+        mavenCentral()
+        jcenter()
+//        maven {
+//            url LOCAL_REPO_RELEASE_URL
+//        }
     }
 }
 

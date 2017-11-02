@@ -26,6 +26,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         public final static Property Username = new Property(1, String.class, "username", false, "username");
         public final static Property Password = new Property(2, String.class, "password", false, "password");
         public final static Property LoginType = new Property(3, int.class, "loginType", false, "loginType");
+        public final static Property IsCurrent = new Property(4, boolean.class, "isCurrent", false, "isCurrent");
+        public final static Property LoginTime = new Property(5, long.class, "loginTime", false, "loginTime");
     }
 
 
@@ -44,7 +46,9 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
                 "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
                 "\"username\" TEXT," + // 1: username
                 "\"password\" TEXT," + // 2: password
-                "\"loginType\" INTEGER NOT NULL );"); // 3: loginType
+                "\"loginType\" INTEGER NOT NULL ," + // 3: loginType
+                "\"isCurrent\" INTEGER NOT NULL ," + // 4: isCurrent
+                "\"loginTime\" INTEGER NOT NULL );"); // 5: loginTime
     }
 
     /** Drops the underlying database table. */
@@ -68,6 +72,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             stmt.bindString(3, password);
         }
         stmt.bindLong(4, entity.getLoginType());
+        stmt.bindLong(5, entity.getIsCurrent() ? 1L: 0L);
+        stmt.bindLong(6, entity.getLoginTime());
     }
 
     @Override
@@ -85,6 +91,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             stmt.bindString(3, password);
         }
         stmt.bindLong(4, entity.getLoginType());
+        stmt.bindLong(5, entity.getIsCurrent() ? 1L: 0L);
+        stmt.bindLong(6, entity.getLoginTime());
     }
 
     @Override
@@ -98,7 +106,9 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
             cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // username
             cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // password
-            cursor.getInt(offset + 3) // loginType
+            cursor.getInt(offset + 3), // loginType
+            cursor.getShort(offset + 4) != 0, // isCurrent
+            cursor.getLong(offset + 5) // loginTime
         );
         return entity;
     }
@@ -109,6 +119,8 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
         entity.setUsername(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setPassword(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
         entity.setLoginType(cursor.getInt(offset + 3));
+        entity.setIsCurrent(cursor.getShort(offset + 4) != 0);
+        entity.setLoginTime(cursor.getLong(offset + 5));
      }
     
     @Override

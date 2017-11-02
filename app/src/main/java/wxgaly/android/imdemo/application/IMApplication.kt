@@ -2,7 +2,6 @@ package wxgaly.android.imdemo.application
 
 import android.app.Application
 import cn.jpush.im.android.api.JMessageClient
-import wxgaly.android.imdemo.entity.UserInfo
 
 /**
  * Created by WXGALY on 2017/11/2.

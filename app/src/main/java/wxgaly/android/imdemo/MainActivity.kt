@@ -1,6 +1,5 @@
 package wxgaly.android.imdemo
 
-import android.arch.lifecycle.LifecycleOwner
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -22,16 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        JMessageClient.setDebugMode(true)
-        JMessageClient.init(this)
-
         initListener()
 
     }
 
     private fun initListener() {
 
-        btn_register.setOnClickListener { _ ->
+        btn_register.setOnClickListener {
             if (!TextUtils.isEmpty(et_username.text) && !TextUtils.isEmpty(et_password.text)) {
                 username = et_username.text.toString().trim()
                 password = et_password.text.toString().trim()
@@ -43,6 +39,16 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT).show()
             }
         }
+
+        btn_logout.setOnClickListener {
+            logout()
+        }
+    }
+
+    private fun logout(){
+        btn_logout.progress = 1
+        JMessageClient.logout()
+        btn_logout.progress = 100
     }
 
     private fun registerIM() {
