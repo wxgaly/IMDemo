@@ -1,6 +1,7 @@
 package wxgaly.android.imdemo.login
 
-import android.os.Handler
+import cn.jpush.im.android.api.JMessageClient
+import cn.jpush.im.api.BasicCallback
 import com.google.common.collect.Lists
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
@@ -11,48 +12,43 @@ import wxgaly.android.imdemo.entity.UserInfo
  * @author Created by WXG on 2017/11/2 002 21:02.
  * @version V1.0
  */
-object UserInfoRemoteDataSource : IUserInfo {
+object UserInfoRemoteDataSource : IUserInfo, IUserInfo.UserInfoStateCallback {
 
     private const val SERVICE_LATENCY_IN_MILLIS = 5000L
 
     private var USERINFO_SERVICE_DATA = LinkedHashMap<String, UserInfo>(2)
 
     override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
-        val userInfo = Lists.newArrayList(USERINFO_SERVICE_DATA.values)
-        Handler().postDelayed({
-            callback.onUserInfoLoaded(userInfo)
-        }, SERVICE_LATENCY_IN_MILLIS)
-
+        callback.onUserInfoLoaded(Lists.newArrayList(USERINFO_SERVICE_DATA.values))
     }
 
     override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback) {
-
-
+        val task = USERINFO_SERVICE_DATA[username]
+        task?.let { callback.onUserInfoLoaded(it) }
 
     }
 
     override fun saveUserInfo(user: UserInfo) {
-
-
+        USERINFO_SERVICE_DATA.put(user.username, user)
     }
 
-    override fun login(user: UserInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun login(user: UserInfo, callback: BasicCallback) {
+        JMessageClient.login(user.username, user.password, callback)
+    }
+
+    override fun register(user: UserInfo, callback: BasicCallback) {
+        JMessageClient.register(user.username, user.password, callback)
     }
 
     override fun logout(user: UserInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun register(username: String, password: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        JMessageClient.logout()
     }
 
     override fun deleteAllUserInfos() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        USERINFO_SERVICE_DATA.clear()
     }
 
     override fun deleteUserInfo(username: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        USERINFO_SERVICE_DATA.remove(username)
     }
 }

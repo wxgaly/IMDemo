@@ -1,5 +1,7 @@
 package wxgaly.android.imdemo.entity
 
+import cn.jpush.im.api.BasicCallback
+
 /**
  *  wxgaly.android.imdemo.entity.
  *
@@ -20,17 +22,19 @@ interface IUserInfo {
         fun onDataNotAvailable()
     }
 
+    interface UserInfoStateCallback{
+        fun login(user : UserInfo, callback: BasicCallback)
+
+        fun logout(user: UserInfo)
+
+        fun register(user : UserInfo, callback: BasicCallback)
+    }
+
     fun getUserInfos(callback: LoadUserInfoCallback)
 
     fun getUserInfo(username: String, callback: GetUserInfoCallback)
 
     fun saveUserInfo(user: UserInfo)
-
-    fun login(user : UserInfo)
-
-    fun logout(user: UserInfo)
-
-    fun register(username: String, password : String)
 
     fun deleteAllUserInfos()
 
