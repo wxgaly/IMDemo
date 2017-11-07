@@ -13,14 +13,14 @@ import wxgaly.android.imdemo.entity.UserInfo
 class UserInfoRepository(
         val userInfoLocalDataSource: UserInfoLocalDataSource,
         val userInfoRemoteDataSource: UserInfoRemoteDataSource
-) : IUserInfo {
+) : IUserInfo, IUserInfo.UserInfoStateCallback {
 
-    override fun login(user: UserInfo, callback: BasicCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun login(user: UserInfo, callback: IUserInfo.UserInfoCallback?) {
+        userInfoRemoteDataSource.login(user, callback)
     }
 
-    override fun register(username: String, password: String, callback: BasicCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun register(user: UserInfo, callback: IUserInfo.UserInfoCallback?) {
+        userInfoRemoteDataSource.register(user, callback)
     }
 
     override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {

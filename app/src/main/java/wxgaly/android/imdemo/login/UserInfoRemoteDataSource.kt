@@ -14,6 +14,7 @@ import wxgaly.android.imdemo.entity.UserInfo
  */
 object UserInfoRemoteDataSource : IUserInfo, IUserInfo.UserInfoStateCallback {
 
+
     private const val SERVICE_LATENCY_IN_MILLIS = 5000L
 
     private var USERINFO_SERVICE_DATA = LinkedHashMap<String, UserInfo>(2)
@@ -32,12 +33,19 @@ object UserInfoRemoteDataSource : IUserInfo, IUserInfo.UserInfoStateCallback {
         USERINFO_SERVICE_DATA.put(user.username, user)
     }
 
-    override fun login(user: UserInfo, callback: BasicCallback) {
-        JMessageClient.login(user.username, user.password, callback)
+    override fun login(user: UserInfo, callback: IUserInfo.UserInfoCallback?) {
+        JMessageClient.login(user.username, user.password, object : BasicCallback() {
+            override fun gotResult(code: Int, message: String?) {
+                callback?.getResult(code, message)
+            }
+        })
     }
-
-    override fun register(user: UserInfo, callback: BasicCallback) {
-        JMessageClient.register(user.username, user.password, callback)
+    override fun register(user: UserInfo, callback: IUserInfo.UserInfoCallback?) {
+        JMessageClient.register(user.username, user.password, object : BasicCallback() {
+            override fun gotResult(code: Int, message: String?) {
+                callback?.getResult(code, message)
+            }
+        })
     }
 
     override fun logout(user: UserInfo) {
