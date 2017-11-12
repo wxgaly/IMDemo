@@ -2,6 +2,7 @@
     <string name="app_name">IMDemo</string>
     <string name="register">register</string>
     <string name="login">login</string>
+    <string name="login_error">登录失败: </string>
     <string name="username_or_password_is_not_null">用户名或密码不能为空</string>
     <string name="logout">logout</string>
 </resources>

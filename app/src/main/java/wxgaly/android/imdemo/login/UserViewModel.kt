@@ -2,9 +2,16 @@ package wxgaly.android.imdemo.login
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
+import android.content.Context
 import android.databinding.ObservableBoolean
+import android.databinding.ObservableField
+import android.text.TextUtils
+import android.view.View
+import com.dd.processbutton.iml.ActionProcessButton
+import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
+import wxgaly.android.imdemo.util.ToastUtils
 
 /**
  *  wxgaly.android.imdemo.login.
@@ -18,21 +25,49 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
     val isLoginSuccess = ObservableBoolean(false)
     val isRegisterSuccess = ObservableBoolean(false)
     val isLogoutSuccess = ObservableBoolean(false)
+    val username = ObservableField<String>()
+    val password = ObservableField<String>()
 
-    override fun login(user: UserInfo) {
-        userInfoRepository.login(user, object : IUserInfo.UserInfoCallback{
-            override fun getResult(code: Int, message: String?) {
+    override fun login(view: View) {
+        val user = UserInfo()
+        user.username = username.get()
+        user.password = password.get()
 
-            }
-        })
+        if (view is ActionProcessButton) {
+            view.progress = 1
+        }
+
+        if (!TextUtils.isEmpty(user.username) && !TextUtils.isEmpty(user.password)) {
+            userInfoRepository.login(user, object : IUserInfo.UserInfoCallback {
+                override fun getResult(code: Int, message: String?) {
+                    if (view is ActionProcessButton && code == 0) {
+                        view.progress = 100
+                    } else {
+                        val context: Context = getApplication()
+                        ToastUtils.showToastShort(getApplication(),
+                                 "${context.resources.getString(R.string.login_error)}$message")
+                    }
+                }
+            })
+        } else {
+            val context: Context = getApplication()
+            ToastUtils.showToastShort(getApplication(),
+                    context.resources.getString(R.string.username_or_password_is_not_null))
+        }
     }
 
-    override fun logout(user: UserInfo) {
+    override fun logout(view: View) {
+        val user = UserInfo()
+        user.username = username.get()
+        user.password = password.get()
         userInfoRepository.logout(user)
     }
 
-    override fun register(user: UserInfo) {
-        userInfoRepository.register(user, object : IUserInfo.UserInfoCallback{
+    override fun register(view: View) {
+        val user = UserInfo()
+        user.username = username.get()
+        user.password = password.get()
+        userInfoRepository.register(user, object : IUserInfo.UserInfoCallback {
             override fun getResult(code: Int, message: String?) {
 
             }
