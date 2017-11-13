@@ -46,6 +46,11 @@ android {
         schemaVersion 1
         targetGenDir 'src/main/java'
     }
+
+}
+
+kapt {
+    generateStubs = true
 }
 
 dependencies {
@@ -64,9 +69,10 @@ dependencies {
     implementation 'cn.jiguang.sdk:jcore:1.1.6'
     // 此处以JCore 1.1.6 版本为例。
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
-    implementation 'com.google.code.findbugs:jsr305:2.0.1'
-    implementation 'android.arch.lifecycle:extensions:1.0.0-rc1'
-    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-rc1"
+    implementation 'com.google.code.findbugs:jsr305:3.0.0'
+    implementation 'android.arch.lifecycle:extensions:1.0.0'
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'com.google.code.gson:gson:2.8.2'
+    kapt "com.android.databinding:compiler:3.0.0"
 }

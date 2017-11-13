@@ -1,7 +1,5 @@
 package wxgaly.android.imdemo.entity
 
-import android.view.View
-
 
 /**
  *  wxgaly.android.imdemo.entity.
@@ -29,14 +27,6 @@ interface IUserInfo {
         fun logout(user: UserInfo)
 
         fun register(user: UserInfo, callback: UserInfoCallback?)
-    }
-
-    interface UserInfoViewListener {
-        fun login(view : View)
-
-        fun logout(view : View)
-
-        fun register(view : View)
     }
 
     interface UserInfoCallback {

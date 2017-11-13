@@ -1,16 +1,15 @@
 package wxgaly.android.imdemo.login
 
-import wxgaly.android.imdemo.entity.UserInfo
+import android.view.View
 
 /**
  * Created by WXGALY on 2017/11/8.
  */
 interface UserInfoActionListener {
 
-    fun login(userInfo : UserInfo)
+    fun login(view : View)
 
-    fun register(userInfo: UserInfo)
+    fun logout(view : View)
 
-    fun logout(userInfo : UserInfo)
-
+    fun register(view : View)
 }

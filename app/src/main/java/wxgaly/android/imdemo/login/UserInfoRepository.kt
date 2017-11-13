@@ -1,6 +1,5 @@
 package wxgaly.android.imdemo.login
 
-import cn.jpush.im.api.BasicCallback
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 
@@ -23,6 +22,10 @@ class UserInfoRepository(
         userInfoRemoteDataSource.register(user, callback)
     }
 
+    override fun logout(user: UserInfo) {
+        userInfoRemoteDataSource.logout(user)
+    }
+
     override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -34,12 +37,6 @@ class UserInfoRepository(
     override fun saveUserInfo(user: UserInfo) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
-
-    override fun logout(user: UserInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
 
     override fun deleteAllUserInfos() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

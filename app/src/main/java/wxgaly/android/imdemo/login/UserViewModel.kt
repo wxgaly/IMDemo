@@ -3,7 +3,6 @@ package wxgaly.android.imdemo.login
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.content.Context
-import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.text.TextUtils
 import android.view.View
@@ -20,11 +19,8 @@ import wxgaly.android.imdemo.util.ToastUtils
  * @version V1.0
  */
 class UserViewModel(context: Application, private val userInfoRepository: UserInfoRepository)
-    : AndroidViewModel(context), IUserInfo, IUserInfo.UserInfoViewListener {
+    : AndroidViewModel(context), IUserInfo, UserInfoActionListener {
 
-    val isLoginSuccess = ObservableBoolean(false)
-    val isRegisterSuccess = ObservableBoolean(false)
-    val isLogoutSuccess = ObservableBoolean(false)
     val username = ObservableField<String>()
     val password = ObservableField<String>()
 
@@ -40,19 +36,28 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         if (!TextUtils.isEmpty(user.username) && !TextUtils.isEmpty(user.password)) {
             userInfoRepository.login(user, object : IUserInfo.UserInfoCallback {
                 override fun getResult(code: Int, message: String?) {
+                    val context: Context = getApplication()
                     if (view is ActionProcessButton && code == 0) {
                         view.progress = 100
-                    } else {
-                        val context: Context = getApplication()
                         ToastUtils.showToastShort(getApplication(),
-                                 "${context.resources.getString(R.string.login_error)}$message")
+                                "${context.resources.getString(R.string.login_success)}$message")
+                    } else {
+                        if (view is ActionProcessButton) {
+                            view.progress = -1
+                        }
+
+                        ToastUtils.showToastShort(getApplication(),
+                                "${context.resources.getString(R.string.login_error)}$message")
                     }
                 }
             })
         } else {
+            if (view is ActionProcessButton) {
+                view.progress = 1
+            }
             val context: Context = getApplication()
-            ToastUtils.showToastShort(getApplication(),
-                    context.resources.getString(R.string.username_or_password_is_not_null))
+            ToastUtils.showToastShort(getApplication(), context.resources.getString(R.string.username_or_password_is_not_null))
+
         }
     }
 
@@ -60,7 +65,16 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         val user = UserInfo()
         user.username = username.get()
         user.password = password.get()
+
+        if (view is ActionProcessButton) {
+            view.progress = -1
+        }
+
         userInfoRepository.logout(user)
+
+        if (view is ActionProcessButton) {
+            view.progress = 100
+        }
     }
 
     override fun register(view: View) {

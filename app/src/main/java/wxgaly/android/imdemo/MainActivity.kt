@@ -1,9 +1,9 @@
 package wxgaly.android.imdemo
 
 import android.content.Context
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.text.TextUtils
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.android.api.callback.GetUserInfoCallback
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
+//        setContentView(R.layout.activity_main)
 
         initData()
         initListener()
@@ -33,8 +33,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initData() {
-
-
+        viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        viewDataBinding.userViewModel = obtainViewModel()
     }
 
     private fun initListener() {
