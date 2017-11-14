@@ -1,5 +1,7 @@
 package wxgaly.android.imdemo.entity
 
+import android.view.View
+
 
 /**
  *  wxgaly.android.imdemo.entity.

@@ -1,7 +1,9 @@
 package wxgaly.android.imdemo.entity
 
 import android.content.Context
+import android.util.Log
 import org.greenrobot.greendao.query.QueryBuilder
+import wxgaly.android.imdemo.constant.IMConstant
 import wxgaly.android.imdemo.constant.IMConstant.IMDataBase.DB_NAME
 
 
@@ -33,7 +35,7 @@ class DaoManager {
     fun getDaoMaster(): DaoMaster? {
         if (mDaoMaster == null) {
             mHelper = DaoMaster.DevOpenHelper(mContext, DB_NAME, null)
-            mDaoMaster = DaoMaster(mHelper?.writableDb)
+            mDaoMaster = DaoMaster(mHelper?.getEncryptedWritableDb(IMConstant.IMDataBase.DB_PASSWORD))
         }
 
         return mDaoMaster
@@ -52,6 +54,14 @@ class DaoManager {
         }
 
         return mDaoSession
+    }
+
+    fun saveUserInfo(userInfo: UserInfo) {
+        try {
+            getDaoSession()?.userInfoDao?.insert(userInfo)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+        }
     }
 
     /**
@@ -89,11 +99,14 @@ class DaoManager {
         private var INSTANCE: DaoManager? = null
 
         @JvmStatic
-        fun getInstance(context: Context) =
+        fun newInstance(context: Context) =
                 INSTANCE ?: synchronized(DaoManager::class.java) {
                     INSTANCE ?: DaoManager().also { INSTANCE = it.init(context) }
                 }
 
+        fun getInstance() = INSTANCE ?: synchronized(DaoManager::class.java) {
+            INSTANCE ?: DaoManager()
+        }
 
         /**
          * Used to force [getInstance] to create a new instance

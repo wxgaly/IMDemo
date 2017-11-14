@@ -35,7 +35,7 @@ class UserInfoRepository(
     }
 
     override fun saveUserInfo(user: UserInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        userInfoLocalDataSource.saveUserInfo(user)
     }
 
     override fun deleteAllUserInfos() {

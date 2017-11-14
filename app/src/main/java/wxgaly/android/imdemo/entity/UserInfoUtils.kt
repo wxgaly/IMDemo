@@ -15,7 +15,7 @@ class UserInfoUtils {
 
     private fun init(context: Context): UserInfoUtils? {
 
-        mManager = DaoManager.getInstance(context)
+        mManager = DaoManager.newInstance(context)
 
         return UserInfoUtils()
     }

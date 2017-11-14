@@ -41,6 +41,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
                         view.progress = 100
                         ToastUtils.showToastShort(getApplication(),
                                 "${context.resources.getString(R.string.login_success)}$message")
+                        userInfoRepository.saveUserInfo(user)
                     } else {
                         if (view is ActionProcessButton) {
                             view.progress = -1

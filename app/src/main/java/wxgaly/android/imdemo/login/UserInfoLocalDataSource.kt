@@ -1,6 +1,7 @@
 package wxgaly.android.imdemo.login
 
 import android.content.Context
+import wxgaly.android.imdemo.entity.DaoManager
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 
@@ -10,7 +11,7 @@ import wxgaly.android.imdemo.entity.UserInfo
  * @author Created by WXG on 2017/11/3 003 10:13.
  * @version V1.0
  */
-class UserInfoLocalDataSource private constructor(context: Context) : IUserInfo {
+class UserInfoLocalDataSource private constructor(private val context: Context) : IUserInfo {
 
     override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -21,7 +22,7 @@ class UserInfoLocalDataSource private constructor(context: Context) : IUserInfo 
     }
 
     override fun saveUserInfo(user: UserInfo) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        DaoManager.getInstance().saveUserInfo(user)
     }
 
     override fun deleteAllUserInfos() {

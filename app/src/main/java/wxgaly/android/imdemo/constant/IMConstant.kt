@@ -10,6 +10,7 @@ object IMConstant {
 
     object IMDataBase {
         const val DB_NAME = "IM_DB"
+        const val DB_PASSWORD = "123456"
     }
 
     /* Inner class that defines the table contents */
