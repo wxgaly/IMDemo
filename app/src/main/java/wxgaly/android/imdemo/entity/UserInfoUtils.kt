@@ -1,6 +1,7 @@
 package wxgaly.android.imdemo.entity
 
 import android.content.Context
+import android.util.Log
 
 /**
  *  wxgaly.android.imdemo.entity.
@@ -11,14 +12,48 @@ import android.content.Context
 class UserInfoUtils {
 
     private val TAG = UserInfoUtils::class.java.simpleName
-    private lateinit var mManager : DaoManager
+    private var mManager: DaoManager
 
-    private fun init(context: Context): UserInfoUtils? {
-
+    constructor(context: Context) {
         mManager = DaoManager.newInstance(context)
-
-        return UserInfoUtils()
     }
+
+    fun deleteAll() {
+        try {
+            mManager.getDaoSession()?.userInfoDao?.deleteAll()
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+        }
+    }
+
+    fun deleteUserInfo(userInfo: UserInfo) {
+        try {
+            mManager.getDaoSession()?.userInfoDao?.delete(userInfo)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+        }
+    }
+
+    fun updateUserInfo(userInfo: UserInfo) {
+        try {
+            mManager.getDaoSession()?.userInfoDao?.update(userInfo)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+        }
+    }
+
+    /**
+     *
+     * @param userInfo
+     */
+    fun saveUserInfo(userInfo: UserInfo) {
+        try {
+            mManager.getDaoSession()?.userInfoDao?.insert(userInfo)
+        } catch (e: Exception) {
+            Log.e(TAG, e.message)
+        }
+    }
+
 
     companion object {
 
@@ -27,7 +62,7 @@ class UserInfoUtils {
         @JvmStatic
         fun getInstance(context: Context) =
                 INSTANCE ?: synchronized(UserInfoUtils::class.java) {
-                    INSTANCE ?: UserInfoUtils().also { INSTANCE = it.init(context) }
+                    INSTANCE ?: UserInfoUtils(context)
                 }
 
 

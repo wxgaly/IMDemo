@@ -73,7 +73,6 @@ dependencies {
     implementation 'android.arch.lifecycle:extensions:1.0.0'
     annotationProcessor "android.arch.lifecycle:compiler:1.0.0"
     implementation 'org.greenrobot:greendao:3.2.2'
-    implementation 'org.greenrobot:greendao-encryption:2.2.2'
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     implementation 'com.google.code.gson:gson:2.8.2'
     kapt "com.android.databinding:compiler:3.0.0"

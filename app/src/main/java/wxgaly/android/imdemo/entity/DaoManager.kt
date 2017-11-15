@@ -3,7 +3,6 @@ package wxgaly.android.imdemo.entity
 import android.content.Context
 import android.util.Log
 import org.greenrobot.greendao.query.QueryBuilder
-import wxgaly.android.imdemo.constant.IMConstant
 import wxgaly.android.imdemo.constant.IMConstant.IMDataBase.DB_NAME
 
 
@@ -35,7 +34,8 @@ class DaoManager {
     fun getDaoMaster(): DaoMaster? {
         if (mDaoMaster == null) {
             mHelper = DaoMaster.DevOpenHelper(mContext, DB_NAME, null)
-            mDaoMaster = DaoMaster(mHelper?.getEncryptedWritableDb(IMConstant.IMDataBase.DB_PASSWORD))
+//            mDaoMaster = DaoMaster(mHelper?.getEncryptedWritableDb(IMConstant.IMDataBase.DB_PASSWORD))
+            mDaoMaster = DaoMaster(mHelper?.writableDb)
         }
 
         return mDaoMaster
@@ -54,14 +54,6 @@ class DaoManager {
         }
 
         return mDaoSession
-    }
-
-    fun saveUserInfo(userInfo: UserInfo) {
-        try {
-            getDaoSession()?.userInfoDao?.insert(userInfo)
-        } catch (e: Exception) {
-            Log.e(TAG, e.message)
-        }
     }
 
     /**

@@ -43,7 +43,7 @@ public class UserInfoDao extends AbstractDao<UserInfo, Long> {
     public static void createTable(Database db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"USER_INFO\" (" + //
-                "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
+                "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL ," + // 0: id
                 "\"username\" TEXT," + // 1: username
                 "\"password\" TEXT," + // 2: password
                 "\"loginType\" INTEGER NOT NULL ," + // 3: loginType

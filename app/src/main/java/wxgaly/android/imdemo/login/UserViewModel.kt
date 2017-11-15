@@ -41,12 +41,14 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
                         view.progress = 100
                         ToastUtils.showToastShort(getApplication(),
                                 "${context.resources.getString(R.string.login_success)}$message")
+                        user.loginType = 1
                         userInfoRepository.saveUserInfo(user)
                     } else {
                         if (view is ActionProcessButton) {
                             view.progress = -1
                         }
 
+                        userInfoRepository.saveUserInfo(user)
                         ToastUtils.showToastShort(getApplication(),
                                 "${context.resources.getString(R.string.login_error)}$message")
                     }
@@ -72,6 +74,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         }
 
         userInfoRepository.logout(user)
+        userInfoRepository.saveUserInfo(user)
 
         if (view is ActionProcessButton) {
             view.progress = 100

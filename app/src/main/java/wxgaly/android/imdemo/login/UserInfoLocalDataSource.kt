@@ -4,6 +4,7 @@ import android.content.Context
 import wxgaly.android.imdemo.entity.DaoManager
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
+import wxgaly.android.imdemo.entity.UserInfoUtils
 
 /**
  *  wxgaly.android.imdemo.login.
@@ -22,7 +23,7 @@ class UserInfoLocalDataSource private constructor(private val context: Context) 
     }
 
     override fun saveUserInfo(user: UserInfo) {
-        DaoManager.getInstance().saveUserInfo(user)
+        UserInfoUtils.getInstance(context).updateUserInfo(user)
     }
 
     override fun deleteAllUserInfos() {
