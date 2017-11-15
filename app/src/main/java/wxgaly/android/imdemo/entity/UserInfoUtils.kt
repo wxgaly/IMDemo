@@ -9,14 +9,10 @@ import android.util.Log
  * @author Created by WXG on 2017/11/2 002 20:29.
  * @version V1.0
  */
-class UserInfoUtils {
+class UserInfoUtils private constructor(context: Context) {
 
     private val TAG = UserInfoUtils::class.java.simpleName
-    private var mManager: DaoManager
-
-    constructor(context: Context) {
-        mManager = DaoManager.newInstance(context)
-    }
+    private var mManager: DaoManager = DaoManager.newInstance(context)
 
     fun deleteAll() {
         try {
