@@ -3,6 +3,7 @@ package wxgaly.android.imdemo.login
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.content.Context
+import android.content.Intent
 import android.databinding.ObservableField
 import android.text.TextUtils
 import android.view.View
@@ -10,6 +11,7 @@ import com.dd.processbutton.iml.ActionProcessButton
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
+import wxgaly.android.imdemo.home.HomeActivity
 import wxgaly.android.imdemo.util.ToastUtils
 
 /**
@@ -29,24 +31,24 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         user.username = username.get()
         user.password = password.get()
 
-        if (view is ActionProcessButton) {
-            view.progress = 1
-        }
 
         if (!TextUtils.isEmpty(user.username) && !TextUtils.isEmpty(user.password)) {
+            (view as ActionProcessButton).progress = 1
             userInfoRepository.login(user, object : IUserInfo.UserInfoCallback {
                 override fun getResult(code: Int, message: String?) {
                     val context: Context = getApplication()
-                    if (view is ActionProcessButton && code == 0) {
+                    if (code == 0) {
                         view.progress = 100
                         ToastUtils.showToastShort(getApplication(),
                                 "${context.resources.getString(R.string.login_success)}$message")
                         user.loginType = 1
                         userInfoRepository.saveUserInfo(user)
-                    } else {
-                        if (view is ActionProcessButton) {
-                            view.progress = -1
+                        val intent = Intent(context, HomeActivity::class.java).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
                         }
+                        context.startActivity(intent)
+                    } else {
+                        view.progress = -1
 
                         userInfoRepository.saveUserInfo(user)
                         ToastUtils.showToastShort(getApplication(),
@@ -55,9 +57,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
                 }
             })
         } else {
-            if (view is ActionProcessButton) {
-                view.progress = 1
-            }
+            (view as ActionProcessButton).progress = -1
             val context: Context = getApplication()
             ToastUtils.showToastShort(getApplication(), context.resources.getString(R.string.username_or_password_is_not_null))
 
@@ -69,16 +69,12 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         user.username = username.get()
         user.password = password.get()
 
-        if (view is ActionProcessButton) {
-            view.progress = -1
-        }
+        (view as ActionProcessButton).progress = -1
 
         userInfoRepository.logout(user)
         userInfoRepository.saveUserInfo(user)
 
-        if (view is ActionProcessButton) {
-            view.progress = 100
-        }
+        view.progress = 100
     }
 
     override fun register(view: View) {
