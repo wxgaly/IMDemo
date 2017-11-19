@@ -85,4 +85,6 @@ dependencies {
     }
 
     annotationProcessor "com.github.hotchemi:permissionsdispatcher-processor:3.0.1"
+
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
 }
