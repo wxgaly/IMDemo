@@ -2,8 +2,14 @@ package wxgaly.android.imdemo
 
 import android.content.Context
 import android.databinding.DataBindingUtil
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.View
+import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.android.api.callback.GetUserInfoCallback
@@ -27,8 +33,29 @@ class MainActivity : AppCompatActivity() {
 
 //        setContentView(R.layout.activity_main)
 
+        setFullScreen()
         initData()
         initListener()
+
+    }
+
+    private fun setFullScreen() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                val option: Int = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                window.decorView.systemUiVisibility = option
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+                window.statusBarColor = Color.TRANSPARENT
+            } else {
+
+                val param: WindowManager.LayoutParams = window.attributes
+                var flagTranslucentStatus: Int = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                param.flags = param.flags or flagTranslucentStatus
+                window.attributes = param
+
+            }
+        }
 
     }
 

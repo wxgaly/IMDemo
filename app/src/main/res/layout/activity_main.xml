@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
-        <import type="android.view.View"/>
+        <import type="android.view.View" />
 
         <variable
             name="userViewModel"
-            type="wxgaly.android.imdemo.login.UserViewModel"/>
+            type="wxgaly.android.imdemo.login.UserViewModel" />
 
     </data>
 
     <android.support.constraint.ConstraintLayout
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@mipmap/login_bg1"
+        android:fitsSystemWindows="true"
         tools:context="wxgaly.android.imdemo.MainActivity">
 
         <EditText
@@ -28,9 +29,10 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@={userViewModel.username}"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/et_password"
@@ -42,9 +44,10 @@
             android:layout_marginTop="8dp"
             android:inputType="textPassword"
             android:text="@={userViewModel.password}"
+            android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/et_username"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_username"/>
+            app:layout_constraintTop_toBottomOf="@+id/et_username" />
 
         <com.dd.processbutton.iml.ActionProcessButton
             android:id="@+id/btn_register"
@@ -67,7 +70,7 @@
             app:pb_colorProgress="@color/purple_progress"
             app:pb_textComplete="Success"
             app:pb_textError="Error"
-            app:pb_textProgress="Loading"/>
+            app:pb_textProgress="Loading" />
 
         <com.dd.processbutton.iml.ActionProcessButton
             android:id="@+id/btn_logout"
@@ -91,7 +94,7 @@
             app:pb_colorProgress="@color/purple_progress"
             app:pb_textComplete="Success"
             app:pb_textError="Error"
-            app:pb_textProgress="Loading"/>
+            app:pb_textProgress="Loading" />
 
     </android.support.constraint.ConstraintLayout>
 </layout>
