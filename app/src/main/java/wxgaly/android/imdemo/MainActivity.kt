@@ -80,15 +80,15 @@ class MainActivity : AppCompatActivity() {
 //            }
 //        }
 
-        btn_logout.setOnClickListener {
-            logout()
-        }
+//        btn_logout.setOnClickListener {
+//            logout()
+//        }
     }
 
     private fun logout() {
-        btn_logout.progress = 1
-        JMessageClient.logout()
-        btn_logout.progress = 100
+//        btn_logout.progress = 1
+//        JMessageClient.logout()
+//        btn_logout.progress = 100
     }
 
     private fun registerIM() {

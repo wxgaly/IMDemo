@@ -6,4 +6,6 @@
     <string name="login_success">登录成功</string>
     <string name="username_or_password_is_not_null">用户名或密码不能为空</string>
     <string name="logout">logout</string>
+    <string name="forget_password">忘记密码?</string>
+    <string name="new_user_register">新用户注册</string>
 </resources>
