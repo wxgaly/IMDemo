@@ -5,7 +5,7 @@
 
     <permission
         android:name="wxgaly.android.imdemo.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature"/>
+        android:protectionLevel="signature" />
 
     <!-- Required -->
     <uses-permission android:name="wxgaly.android.imdemo.permission.JPUSH_MESSAGE" />
@@ -39,7 +39,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/theme_no_title">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

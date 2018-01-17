@@ -10,7 +10,7 @@ apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    buildToolsVersion "27.0.1"
     defaultConfig {
         applicationId "wxgaly.android.imdemo"
         minSdkVersion 15
@@ -77,7 +77,6 @@ dependencies {
     implementation 'org.greenrobot:greendao:3.2.2'
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     implementation 'com.google.code.gson:gson:2.8.2'
-    kapt "com.android.databinding:compiler:3.0.0"
 
     compile("com.github.hotchemi:permissionsdispatcher:3.0.1") {
         // if you don't use android.app.Fragment you can exclude support for them
