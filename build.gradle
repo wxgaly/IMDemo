@@ -14,6 +14,7 @@ buildscript {
 //        maven {
 //            url LOCAL_REPO_RELEASE_URL
 //        }
+//test console push
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.1.0-alpha08'
