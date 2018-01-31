@@ -26,11 +26,11 @@ class UserInfoRepository(
         userInfoRemoteDataSource.logout(user)
     }
 
-    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback?) {
+        userInfoLocalDataSource.getUserInfos(callback)
     }
 
-    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback) {
+    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

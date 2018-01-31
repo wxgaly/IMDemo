@@ -32,7 +32,20 @@ class UserInfoUtils private constructor(context: Context) {
 
     fun updateUserInfo(userInfo: UserInfo) {
         try {
-            mManager.getDaoSession()?.userInfoDao?.update(userInfo)
+            val userInfoDao = mManager.getDaoSession()?.userInfoDao
+
+            val id = userInfoDao?.getKey(userInfo)
+
+            if (id != null) {
+                if (userInfoDao.load(id) != null) {
+                    userInfoDao.update(userInfo)
+                } else {
+                    userInfoDao.insert(userInfo)
+                }
+            } else {
+                userInfoDao?.insert(userInfo)
+            }
+
         } catch (e: Exception) {
             Log.e(TAG, e.message)
         }
@@ -49,6 +62,8 @@ class UserInfoUtils private constructor(context: Context) {
             Log.e(TAG, e.message)
         }
     }
+
+    fun getUsers(): List<UserInfo>? = mManager.getDaoSession()?.userInfoDao?.loadAll()
 
 
     companion object {

@@ -35,9 +35,9 @@ interface IUserInfo {
         fun getResult(code : Int, message : String?)
     }
 
-    fun getUserInfos(callback: LoadUserInfoCallback)
+    fun getUserInfos(callback: LoadUserInfoCallback?)
 
-    fun getUserInfo(username: String, callback: GetUserInfoCallback)
+    fun getUserInfo(username: String, callback: GetUserInfoCallback?)
 
     fun saveUserInfo(user: UserInfo)
 

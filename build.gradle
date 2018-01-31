@@ -17,7 +17,7 @@ buildscript {
 //test console push
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-alpha08'
+        classpath 'com.android.tools.build:gradle:3.1.0-beta1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.greenrobot:greendao-gradle-plugin:$greendao_version"
 

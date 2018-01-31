@@ -30,7 +30,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         val user = UserInfo()
         user.username = username.get()
         user.password = password.get()
-
+        user.loginTime = System.currentTimeMillis()
 
         if (!TextUtils.isEmpty(user.username) && !TextUtils.isEmpty(user.password)) {
             (view as ActionProcessButton).progress = 1
@@ -89,12 +89,26 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
         })
     }
 
-    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback?) {
+
+        userInfoRepository.getUserInfos(object : IUserInfo.LoadUserInfoCallback {
+            override fun onUserInfoLoaded(users: List<UserInfo>) {
+                if (users.isNotEmpty()) {
+                    users[0].apply {
+                        this@UserViewModel.username.set(username)
+                        this@UserViewModel.password.set(password)
+                    }
+                }
+            }
+
+            override fun onDataNotAvailable() {
+                callback?.onDataNotAvailable()
+            }
+
+        })
     }
 
-    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback?) {
     }
 
     override fun saveUserInfo(user: UserInfo) {

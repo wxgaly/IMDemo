@@ -63,6 +63,7 @@ class MainActivity : AppCompatActivity() {
     private fun initData() {
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewDataBinding.userViewModel = obtainViewModel()
+        viewDataBinding.userViewModel!!.getUserInfos(null)
     }
 
     private fun initListener() {

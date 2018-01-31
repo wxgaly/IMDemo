@@ -19,13 +19,13 @@ object UserInfoRemoteDataSource : IUserInfo, IUserInfo.UserInfoStateCallback {
 
     private var USERINFO_SERVICE_DATA = LinkedHashMap<String, UserInfo>(2)
 
-    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
-        callback.onUserInfoLoaded(Lists.newArrayList(USERINFO_SERVICE_DATA.values))
+    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback?) {
+        callback?.onUserInfoLoaded(Lists.newArrayList(USERINFO_SERVICE_DATA.values))
     }
 
-    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback) {
+    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback?) {
         val task = USERINFO_SERVICE_DATA[username]
-        task?.let { callback.onUserInfoLoaded(it) }
+        task?.let { callback?.onUserInfoLoaded(it) }
 
     }
 

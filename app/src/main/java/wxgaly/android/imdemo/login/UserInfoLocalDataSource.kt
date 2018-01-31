@@ -14,11 +14,14 @@ import wxgaly.android.imdemo.entity.UserInfoUtils
  */
 class UserInfoLocalDataSource private constructor(private val context: Context) : IUserInfo {
 
-    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getUserInfos(callback: IUserInfo.LoadUserInfoCallback?) {
+        UserInfoUtils.getInstance(context).getUsers()?.let {
+            callback?.onUserInfoLoaded(it)
+        }
+
     }
 
-    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback) {
+    override fun getUserInfo(username: String, callback: IUserInfo.GetUserInfoCallback?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
