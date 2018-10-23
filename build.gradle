@@ -5,7 +5,7 @@ ext {
 }
 
 buildscript {
-    ext.kotlin_version = '1.2.20'
+    ext.kotlin_version = '1.2.71'
     ext.greendao_version = '3.2.2'
     repositories {
         google()
@@ -14,10 +14,9 @@ buildscript {
 //        maven {
 //            url LOCAL_REPO_RELEASE_URL
 //        }
-//test console push
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0-beta1'
+        classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.greenrobot:greendao-gradle-plugin:$greendao_version"
 
@@ -31,7 +30,6 @@ allprojects {
         google()
         mavenCentral()
         jcenter()
-        maven { url 'https://jitpack.io' }
 //        maven {
 //            url LOCAL_REPO_RELEASE_URL
 //        }
