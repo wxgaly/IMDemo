@@ -9,8 +9,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="userViewModel"
-            type="wxgaly.android.imdemo.login.UserViewModel" />
+            name="registerViewModel"
+            type="wxgaly.android.imdemo.register.RegisterViewModel" />
 
     </data>
 
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:background="@mipmap/bg"
         android:fitsSystemWindows="true"
-        tools:context="wxgaly.android.imdemo.MainActivity">
+        tools:context="wxgaly.android.imdemo.register.RegisterActivity">
 
         <TextView
             android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:gravity="center"
-            android:text="@string/app_name"
+            android:text="@string/register"
             android:textColor="@color/black"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,9 +39,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="8dp"
-            android:text="@={userViewModel.username}"
+            android:text="@={registerViewModel.username}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -57,7 +57,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:inputType="textPassword"
-            android:text="@={userViewModel.password}"
+            android:text="@={registerViewModel.password}"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/et_username"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,9 +69,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:onClick="@{(view) -> userViewModel.login(view)}"
+            android:onClick="@{(view) -> registerViewModel.register(view)}"
             android:progress="1"
-            android:text="@string/login"
+            android:text="@string/register"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -86,32 +86,7 @@
             app:pb_textError="Error"
             app:pb_textProgress="Loading" />
 
-        <TextView
-            android:id="@+id/login_tv_forget_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="310dp"
-            android:text="@string/forget_password"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/login_tv_user_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="310dp"
-            android:layout_marginEnd="24dp"
-            android:onClick="@{(view) -> userViewModel.startRegisterActivity(view)}"
-            android:text="@string/new_user_register"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </android.support.constraint.ConstraintLayout>
+
 </layout>

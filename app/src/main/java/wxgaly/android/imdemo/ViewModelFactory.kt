@@ -7,6 +7,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.support.annotation.VisibleForTesting
 import wxgaly.android.imdemo.login.UserInfoRepository
 import wxgaly.android.imdemo.login.UserViewModel
+import wxgaly.android.imdemo.register.RegisterViewModel
 
 /**
  *  wxgaly.android.imdemo.
@@ -24,6 +25,8 @@ class ViewModelFactory private constructor(
                 when {
                     isAssignableFrom(UserViewModel::class.java) ->
                         UserViewModel(application, userInfoRepository)
+                    isAssignableFrom(RegisterViewModel::class.java) ->
+                        RegisterViewModel(application, userInfoRepository)
                     else ->
                         throw IllegalArgumentException("Unknown ViewModel class: ${modelClass.name}")
                 }

@@ -1,15 +1,22 @@
 package wxgaly.android.imdemo.register
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import android.databinding.DataBindingUtil
+import wxgaly.android.imdemo.BaseActivity
+import wxgaly.android.imdemo.R
+import wxgaly.android.imdemo.databinding.ActivityRegisterBinding
+import wxgaly.android.imdemo.util.obtainViewModel
 
 /**
  * Created by WXGALY on 2017/11/20.
  */
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private lateinit var viewDataBinding: ActivityRegisterBinding
+
+    override fun initData() {
+        viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
+        viewDataBinding.registerViewModel = obtainViewModel(RegisterViewModel::class.java)
     }
+
 
 }

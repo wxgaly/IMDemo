@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">IMDemo</string>
-    <string name="register">register</string>
+
+    <!-- 登录页面 -->
     <string name="login">login</string>
     <string name="login_error">登录失败: </string>
     <string name="login_success">登录成功</string>
@@ -8,4 +9,8 @@
     <string name="logout">logout</string>
     <string name="forget_password">忘记密码?</string>
     <string name="new_user_register">新用户注册</string>
+
+    <!-- 注册页面 -->
+    <string name="register">注册</string>
+
 </resources>
