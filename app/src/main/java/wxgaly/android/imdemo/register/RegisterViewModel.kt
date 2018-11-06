@@ -8,7 +8,7 @@ import android.text.TextUtils
 import android.view.View
 import com.dd.processbutton.iml.ActionProcessButton
 import wxgaly.android.imdemo.R
-import wxgaly.android.imdemo.entity.IUserInfo
+import wxgaly.android.imdemo.SingleLiveEvent
 import wxgaly.android.imdemo.entity.UserInfo
 import wxgaly.android.imdemo.login.UserInfoActionListener
 import wxgaly.android.imdemo.login.UserInfoRepository
@@ -25,6 +25,7 @@ class RegisterViewModel(context: Application, private val userInfoRepository: Us
 
     val username = ObservableField<String>()
     val password = ObservableField<String>()
+    val registerSuccessEvent = SingleLiveEvent<Void>()
 
     override fun login(view: View) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -41,12 +42,18 @@ class RegisterViewModel(context: Application, private val userInfoRepository: Us
 
         if (!TextUtils.isEmpty(user.username) && !TextUtils.isEmpty(user.password)) {
             (view as ActionProcessButton).progress = 1
-            userInfoRepository.register(user, object : IUserInfo.UserInfoCallback {
-                override fun getResult(code: Int, message: String?) {
-                    ToastUtils.showToastShort(getApplication(), "code is $code, message is $message")
-                }
-            })
-
+//            userInfoRepository.register(user, object : IUserInfo.UserInfoCallback {
+//                override fun getResult(code: Int, message: String?) {
+//                    if (code == 0) {
+//                        view.progress = 100
+//
+//                    } else {
+//
+//                    }
+//                }
+//            })
+            view.progress = 100
+            registerSuccessEvent.call()
         } else {
             (view as ActionProcessButton).progress = -1
             val context: Context = getApplication()

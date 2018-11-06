@@ -1,8 +1,11 @@
 package wxgaly.android.imdemo
 
+import android.arch.lifecycle.Observer
 import android.content.Context
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import cn.jpush.im.android.api.JMessageClient
 import cn.jpush.im.android.api.callback.GetUserInfoCallback
@@ -12,11 +15,12 @@ import com.dd.processbutton.iml.ActionProcessButton
 import kotlinx.android.synthetic.main.activity_main.*
 import wxgaly.android.imdemo.databinding.ActivityMainBinding
 import wxgaly.android.imdemo.login.UserViewModel
+import wxgaly.android.imdemo.register.RegisterActivity
 import wxgaly.android.imdemo.util.obtainViewModel
 
 class MainActivity : BaseActivity() {
 
-
+    val TAG = "MainActivity"
     lateinit var username: String
     lateinit var password: String
     private lateinit var viewDataBinding: ActivityMainBinding
@@ -33,6 +37,16 @@ class MainActivity : BaseActivity() {
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewDataBinding.userViewModel = obtainViewModel()
         viewDataBinding.userViewModel!!.getUserInfos(null)
+
+        viewDataBinding.userViewModel?.run {
+            registerSingleLiveEvent.observe(this@MainActivity, Observer {
+                val intent = Intent(this@MainActivity, RegisterActivity::class.java).apply {
+                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                }
+                startActivityForResult(intent, REGISTER_SUCCESS_REQUEST_CODE)
+            })
+
+        }
     }
 
     private fun initListener() {
@@ -96,5 +110,13 @@ class MainActivity : BaseActivity() {
     }
 
     fun obtainViewModel(): UserViewModel = obtainViewModel(UserViewModel::class.java)
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d(TAG, "onActivityResult requestCode : $requestCode --- resultCode : $resultCode")
+        data?.apply {
+            Log.d(TAG, "getStringExtra() : ${getStringExtra("username")}")
+        }
+    }
 
 }

@@ -9,10 +9,10 @@ import android.text.TextUtils
 import android.view.View
 import com.dd.processbutton.iml.ActionProcessButton
 import wxgaly.android.imdemo.R
+import wxgaly.android.imdemo.SingleLiveEvent
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 import wxgaly.android.imdemo.home.HomeActivity
-import wxgaly.android.imdemo.register.RegisterActivity
 import wxgaly.android.imdemo.util.ToastUtils
 
 /**
@@ -26,6 +26,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
 
     val username = ObservableField<String>()
     val password = ObservableField<String>()
+    val registerSingleLiveEvent = SingleLiveEvent<Void>()
 
     override fun login(view: View) {
         val user = UserInfo()
@@ -125,11 +126,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
     }
 
     fun startRegisterActivity(view: View) {
-        val context: Context = getApplication()
-        val intent = Intent(context, RegisterActivity::class.java).apply {
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-        context.startActivity(intent)
+        registerSingleLiveEvent.call()
     }
 
 }

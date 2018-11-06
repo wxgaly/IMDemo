@@ -1,5 +1,7 @@
 package wxgaly.android.imdemo.register
 
+import android.arch.lifecycle.Observer
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import wxgaly.android.imdemo.BaseActivity
 import wxgaly.android.imdemo.R
@@ -16,6 +18,16 @@ class RegisterActivity : BaseActivity() {
     override fun initData() {
         viewDataBinding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         viewDataBinding.registerViewModel = obtainViewModel(RegisterViewModel::class.java)
+
+        val activity = this@RegisterActivity
+        viewDataBinding.registerViewModel?.run {
+            registerSuccessEvent.observe(activity, Observer {
+                val userInfoIntent = Intent()
+                userInfoIntent.putExtra("username", username.get())
+                setResult(REGISTER_SUCCESS_RESPONSE_CODE, userInfoIntent)
+                finish()
+            })
+        }
     }
 
 
