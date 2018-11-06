@@ -24,7 +24,7 @@ class RegisterActivity : BaseActivity() {
             registerSuccessEvent.observe(activity, Observer {
                 val userInfoIntent = Intent()
                 userInfoIntent.putExtra("username", username.get())
-                setResult(REGISTER_SUCCESS_RESPONSE_CODE, userInfoIntent)
+                activity.setResult(REGISTER_SUCCESS_RESPONSE_CODE, userInfoIntent)
                 finish()
             })
         }
