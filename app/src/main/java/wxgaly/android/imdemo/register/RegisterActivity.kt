@@ -23,8 +23,9 @@ class RegisterActivity : BaseActivity() {
         viewDataBinding.registerViewModel?.run {
             registerSuccessEvent.observe(activity, Observer {
                 val userInfoIntent = Intent()
-                userInfoIntent.putExtra("username", username.get())
-                activity.setResult(REGISTER_SUCCESS_RESPONSE_CODE, userInfoIntent)
+                userInfoIntent.putExtra(KEY_USERNAME, username.get())
+                userInfoIntent.putExtra(KEY_PASSWORD, password.get())
+                activity.setResult(REGISTER_SUCCESS_RESULT_CODE, userInfoIntent)
                 finish()
             })
         }

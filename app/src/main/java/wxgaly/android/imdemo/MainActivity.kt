@@ -3,10 +3,10 @@ package wxgaly.android.imdemo
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.util.Log
 import wxgaly.android.imdemo.databinding.ActivityMainBinding
 import wxgaly.android.imdemo.login.UserViewModel
 import wxgaly.android.imdemo.register.RegisterActivity
+import wxgaly.android.imdemo.util.Logger
 import wxgaly.android.imdemo.util.obtainViewModel
 
 class MainActivity : BaseActivity() {
@@ -37,10 +37,15 @@ class MainActivity : BaseActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        Log.d(TAG, "onActivityResult requestCode : $requestCode --- resultCode : $resultCode")
-        data?.apply {
-            Log.d(TAG, "getStringExtra() : ${getStringExtra("username")}")
+
+        if (requestCode == REGISTER_SUCCESS_REQUEST_CODE && resultCode == REGISTER_SUCCESS_RESULT_CODE) {
+            data?.apply {
+                viewDataBinding.userViewModel?.apply {
+                    Logger.i(TAG, "$KEY_USERNAME : ${getStringExtra(KEY_USERNAME)}")
+                    username.set(getStringExtra(KEY_USERNAME))
+                    password.set(getStringExtra(KEY_PASSWORD))
+                }
+            }
         }
     }
-
 }

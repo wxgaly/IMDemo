@@ -15,8 +15,11 @@ import android.view.WindowManager
  */
 abstract class BaseActivity : AppCompatActivity() {
 
+    val KEY_USERNAME = "username"
+    val KEY_PASSWORD = "password"
+
     val REGISTER_SUCCESS_REQUEST_CODE = 10000
-    val REGISTER_SUCCESS_RESPONSE_CODE = 10001
+    val REGISTER_SUCCESS_RESULT_CODE = 10001
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
