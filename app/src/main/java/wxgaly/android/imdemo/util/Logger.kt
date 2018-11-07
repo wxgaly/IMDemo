@@ -15,7 +15,15 @@ object Logger {
     private val TAG = "TAG"
 
     fun i(tag: String = TAG, msg: String) {
-        Log.d(tag, msg)
+        if (isDebug) {
+            Log.i(tag, msg)
+        }
+    }
+
+    fun d(tag: String = TAG, msg: String) {
+        if (isDebug) {
+            Log.d(tag, msg)
+        }
     }
 
 }

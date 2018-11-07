@@ -9,6 +9,7 @@ import android.view.View
 import com.dd.processbutton.iml.ActionProcessButton
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.SingleLiveEvent
+import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 import wxgaly.android.imdemo.login.UserInfoActionListener
 import wxgaly.android.imdemo.login.UserInfoRepository
@@ -42,18 +43,18 @@ class RegisterViewModel(context: Application, private val userInfoRepository: Us
 
         if (!TextUtils.isEmpty(user.username) && !TextUtils.isEmpty(user.password)) {
             (view as ActionProcessButton).progress = 1
-//            userInfoRepository.register(user, object : IUserInfo.UserInfoCallback {
-//                override fun getResult(code: Int, message: String?) {
-//                    if (code == 0) {
-//                        view.progress = 100
-//
-//                    } else {
-//
-//                    }
-//                }
-//            })
-            view.progress = 100
-            registerSuccessEvent.call()
+            userInfoRepository.register(user, object : IUserInfo.UserInfoCallback {
+                override fun getResult(code: Int, message: String?) {
+                    if (code == 0) {
+                        view.progress = 100
+                        registerSuccessEvent.call()
+                    } else {
+                        val context: Context = getApplication()
+                        ToastUtils.showToastShort(context, "${context.resources.getString(R.string.register_error)}," +
+                                " ${context.resources.getString(R.string.register_error_code)} $code")
+                    }
+                }
+            })
         } else {
             (view as ActionProcessButton).progress = -1
             val context: Context = getApplication()

@@ -41,7 +41,7 @@ class MainActivity : BaseActivity() {
         if (requestCode == REGISTER_SUCCESS_REQUEST_CODE && resultCode == REGISTER_SUCCESS_RESULT_CODE) {
             data?.apply {
                 viewDataBinding.userViewModel?.apply {
-                    Logger.i(TAG, "$KEY_USERNAME : ${getStringExtra(KEY_USERNAME)}")
+                    Logger.d(TAG, "$KEY_USERNAME : ${getStringExtra(KEY_USERNAME)}")
                     username.set(getStringExtra(KEY_USERNAME))
                     password.set(getStringExtra(KEY_PASSWORD))
                 }

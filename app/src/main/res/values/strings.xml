@@ -12,5 +12,6 @@
 
     <!-- 注册页面 -->
     <string name="register">注册</string>
-
+    <string name="register_error">注册失败</string>
+    <string name="register_error_code">错误码: </string>
 </resources>
