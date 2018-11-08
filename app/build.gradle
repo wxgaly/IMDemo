@@ -91,7 +91,7 @@ dependencies {
 
     kapt "com.github.hotchemi:permissionsdispatcher-processor:3.3.1"
 
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+//    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
 
     //NavigationTabBar
     implementation 'devlight.io:navigationtabbar:1.2.5'
