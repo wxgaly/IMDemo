@@ -2,14 +2,16 @@ package wxgaly.android.imdemo.home
 
 import android.graphics.Color
 import android.os.Bundle
-import android.support.v4.view.PagerAdapter
+import android.support.v4.app.Fragment
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.activity_home.*
 import wxgaly.android.imdemo.R
+import wxgaly.android.imdemo.home.adapter.HomeFragmentAdapter
+import wxgaly.android.imdemo.home.fragment.ContactsFragment
+import wxgaly.android.imdemo.home.fragment.HomeFragment
+import wxgaly.android.imdemo.home.fragment.MessageFragment
 
 /**
  *  wxgaly.android.imdemo.home.
@@ -19,6 +21,9 @@ import wxgaly.android.imdemo.R
  */
 class HomeActivity : AppCompatActivity() {
 
+    private var mFragments = ArrayList<Fragment>()
+    private lateinit var homeFragmentAdapter: HomeFragmentAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -27,52 +32,48 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        val views = arrayListOf<View>()
-        val layoutInflater = LayoutInflater.from(this)
-        views.add(layoutInflater.inflate(R.layout.frag_message, null, false))
-        views.add(layoutInflater.inflate(R.layout.frag_contacts, null, false))
-        views.add(layoutInflater.inflate(R.layout.frag_home, null, false))
+        initFragment()
 
-        vp.adapter = object : PagerAdapter() {
-            override fun isViewFromObject(p0: View, p1: Any): Boolean = p0 == p1
+        initViewPager()
 
-            override fun getCount(): Int = views.size
+        initNavigation()
+    }
 
-            override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-                container.removeView(`object` as View)
-            }
+    private fun initFragment() {
+        mFragments.add(MessageFragment.newInstance())
+        mFragments.add(ContactsFragment.newInstance())
+        mFragments.add(HomeFragment.newInstance())
 
-            override fun instantiateItem(container: ViewGroup, position: Int): Any {
+        homeFragmentAdapter = HomeFragmentAdapter(supportFragmentManager, mFragments)
+    }
 
-                val view = views[position]
-                container.addView(view)
-                return view
-            }
-        }
+    private fun initViewPager() {
+        vp.offscreenPageLimit = mFragments.size
+        vp.adapter = homeFragmentAdapter
+    }
 
+    private fun initNavigation() {
         val colors = resources.getStringArray(R.array.default_preview)
 
         val models = arrayListOf<NavigationTabBar.Model>()
 
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable
-                .ic_frag_message), Color.parseColor(colors[0]))
+        models.add(NavigationTabBar.Model.Builder(ResourcesCompat.getDrawable(resources, R.drawable
+                .ic_frag_message, null), Color.parseColor(colors[0]))
                 .title(resources.getString(R.string.frag_message))
                 .build())
 
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable
-                .ic_frag_contacts), Color.parseColor(colors[1]))
+        models.add(NavigationTabBar.Model.Builder(ResourcesCompat.getDrawable(resources, R.drawable
+                .ic_frag_contacts, null), Color.parseColor(colors[1]))
                 .title(resources.getString(R.string.frag_contacts))
                 .build())
 
-        models.add(NavigationTabBar.Model.Builder(resources.getDrawable(R.drawable
-                .ic_frag_home), Color.parseColor(colors[2]))
+        models.add(NavigationTabBar.Model.Builder(ResourcesCompat.getDrawable(resources, R.drawable
+                .ic_frag_home, null), Color.parseColor(colors[2]))
                 .title(resources.getString(R.string.frag_home))
                 .build())
 
         ntb.models = models
         ntb.setViewPager(vp, 0)
-        models[0].toggleBadge()
-        models[0].badgeTitle = "1"
     }
 
 }
