@@ -26,10 +26,19 @@ class MessageFragment : BaseFragment() {
     }
 
     override fun initData() {
+//        val singleTextMessage = JMessageClient.createSingleTextMessage("wxgaly", JMessageClient.getMyInfo().appKey,
+//                "你好")
+//        singleTextMessage.setOnSendCompleteCallback(object : BasicCallback() {
+//            override fun gotResult(code: Int, msg: String?) {
+//                Logger.d(TAG, "消息发送 ：code is $code, msg is $msg")
+//            }
+//        })
+//
+//        JMessageClient.sendMessage(singleTextMessage)
 
         JMessageClient.getConversationList()?.forEach { conversation ->
             conversation.allMessage?.forEach {
-                Logger.d(TAG, "${conversation.id} : ${it.content}")
+                Logger.d(TAG, "${conversation.title} : ${it.content.toJson()}")
             }
         }
 
