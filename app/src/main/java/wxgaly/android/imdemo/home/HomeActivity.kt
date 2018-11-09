@@ -7,6 +7,7 @@ import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import devlight.io.library.ntb.NavigationTabBar
 import kotlinx.android.synthetic.main.activity_home.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.home.adapter.HomeFragmentAdapter
 import wxgaly.android.imdemo.home.fragment.ContactsFragment
@@ -32,11 +33,18 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun initView() {
+        initToolBar()
+
         initFragment()
 
         initViewPager()
 
         initNavigation()
+    }
+
+    private fun initToolBar() {
+        setSupportActionBar(toolbar)
+        toolbar.title = getString(R.string.app_name)
     }
 
     private fun initFragment() {

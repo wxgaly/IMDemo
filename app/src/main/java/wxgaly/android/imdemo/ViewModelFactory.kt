@@ -20,6 +20,7 @@ class ViewModelFactory private constructor(
         private val userInfoRepository: UserInfoRepository
 ) : ViewModelProvider.NewInstanceFactory() {
 
+    @Suppress("UNCHECKED_CAST", "IMPLICIT_CAST_TO_ANY")
     override fun <T : ViewModel> create(modelClass: Class<T>) =
             with(modelClass) {
                 when {

@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+    >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/frag_message"
-        android:textColor="@color/black"
-        />
+    <cn.jiguang.imui.messages.MessageList
+        android:id="@+id/msg_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:avatarHeight="50dp"
+        app:avatarWidth="50dp"
+        app:bubbleMaxWidth="0.70"
+        app:dateTextSize="14sp"
+        app:receiveBubblePaddingLeft="20dp"
+        app:receiveBubblePaddingRight="10dp"
+        app:receiveTextColor="#ffffff"
+        app:receiveTextSize="18sp"
+        app:sendBubblePaddingLeft="10dp"
+        app:sendBubblePaddingRight="20dp"
+        app:sendTextColor="#7587A8"
+        app:sendTextSize="18sp"/>
 
-</RelativeLayout>
+</LinearLayout>
