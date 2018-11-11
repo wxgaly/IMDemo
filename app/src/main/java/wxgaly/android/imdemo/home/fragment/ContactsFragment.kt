@@ -14,11 +14,16 @@ import wxgaly.android.imdemo.R
  */
 class ContactsFragment : BaseFragment() {
 
+
     override fun getView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.frag_contacts, container, false)
     }
 
     override fun initData() {
+    }
+
+    override fun initView(view: View?) {
+
     }
 
     companion object {

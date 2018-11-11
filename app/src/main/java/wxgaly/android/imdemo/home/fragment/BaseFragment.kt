@@ -14,9 +14,13 @@ import android.view.ViewGroup
  */
 abstract class BaseFragment : Fragment() {
 
+    var baseView: View? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         initData()
-        return getView(inflater, container, savedInstanceState)
+        baseView = getView(inflater, container, savedInstanceState)
+        initView(baseView)
+        return baseView
     }
 
     /**
@@ -28,4 +32,9 @@ abstract class BaseFragment : Fragment() {
      * init data.
      */
     abstract fun initData()
+
+    /**
+     * init view.
+     */
+    abstract fun initView(view: View?)
 }

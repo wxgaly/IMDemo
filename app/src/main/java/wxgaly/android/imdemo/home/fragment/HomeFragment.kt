@@ -21,6 +21,10 @@ class HomeFragment : BaseFragment() {
     override fun initData() {
     }
 
+    override fun initView(view: View?) {
+
+    }
+
     companion object {
 
         fun newInstance() = HomeFragment()
