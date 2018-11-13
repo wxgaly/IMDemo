@@ -10,5 +10,6 @@
     <color name="blue_normal">#0066ff</color>
     <color name="light_toolbar_bg">#9ba6ba</color>
     <color name="dark_toolbar_bg">#9fa0aa</color>
+    <color name="light_gray">#44bebebe</color>
 
 </resources>
