@@ -1,5 +1,6 @@
 package wxgaly.android.imdemo.home
 
+import cn.jpush.im.android.api.JMessageClient
 import wxgaly.android.imdemo.BaseActivity
 
 /**
@@ -14,9 +15,9 @@ class ChatActivity : BaseActivity() {
 //    private var messageAdapter: MsgListAdapter<ChatMessage>? = null
 
     override fun initData() {
-        //        val singleTextMessage = JMessageClient.createSingleTextMessage("wxgaly1", JMessageClient
-//                .getMyInfo().appKey,
-//                "你好吗？")
+                val singleTextMessage = JMessageClient.createSingleTextMessage("wxgaly1", JMessageClient
+                .getMyInfo().appKey,
+                "你好吗？")
 //        singleTextMessage.setOnSendCompleteCallback(object : BasicCallback() {
 //            override fun gotResult(code: Int, msg: String?) {
 //                Logger.d(TAG, "消息发送 ：code is $code, msg is $msg")

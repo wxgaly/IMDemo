@@ -10,8 +10,14 @@ import wxgaly.android.imdemo.entity.chat.ChatConversation
  */
 interface IConversation {
 
-    fun getAllConversation(): List<ChatConversation>?
+    interface OnMessageCompleteListener {
+        fun gotResult(code: Int, msg: String)
+    }
+
+    fun getAllConversation(): List<ChatConversation>
 
     fun getConversationById(id: String): ChatConversation?
+
+    fun sendSimpleTextMessage(id: String, content: String, listener: OnMessageCompleteListener?)
 
 }

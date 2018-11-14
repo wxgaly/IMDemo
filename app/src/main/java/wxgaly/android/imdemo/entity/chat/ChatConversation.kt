@@ -30,7 +30,7 @@ class ChatConversation {
         SINGLE, GROUP, CHAT_ROOM
     }
 
-    data class Message(val id: String,
+    data class Message(val id: Int,
                        val messageType: MessageType,
                        val messageStatus: MessageStatus,
                        val messageContent: MessageContent,
