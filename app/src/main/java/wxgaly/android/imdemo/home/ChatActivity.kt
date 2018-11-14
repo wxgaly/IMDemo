@@ -25,7 +25,6 @@ class ChatActivity : BaseActivity() {
 //
 //        JMessageClient.sendMessage(singleTextMessage)
 
-
         //        view?.apply {
 //            messageListView = findViewById(R.id.msg_list)
 //
