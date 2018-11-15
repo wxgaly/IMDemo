@@ -1,5 +1,6 @@
 package wxgaly.android.imdemo
 
+import android.arch.lifecycle.AndroidViewModel
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -28,6 +29,8 @@ abstract class BaseActivity : AppCompatActivity() {
     }
 
     abstract fun initData()
+
+    abstract fun obtainViewModel(): AndroidViewModel
 
     private fun setFullScreen() {
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)

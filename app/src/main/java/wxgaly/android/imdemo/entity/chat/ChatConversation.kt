@@ -1,6 +1,7 @@
 package wxgaly.android.imdemo.entity.chat
 
 import java.io.File
+import java.util.*
 
 /**
  *  wxgaly.android.imdemo.entity.chat.
@@ -20,7 +21,7 @@ class ChatConversation {
     var latestMessage: Message? = null
     var latestText: String? = null
     var latestType: ContentType? = null
-    var lastMsgDate: Long? = null
+    var lastMsgDate: Long = Date().time
     var extra: String? = null
 
     /**

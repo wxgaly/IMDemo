@@ -9,6 +9,7 @@
     <string name="logout">logout</string>
     <string name="forget_password">忘记密码?</string>
     <string name="new_user_register">新用户注册</string>
+    <string name="get_permission_fail">获取权限失败</string>
 
     <!-- 注册页面 -->
     <string name="register">注册</string>

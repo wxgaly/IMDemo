@@ -1,5 +1,6 @@
 package wxgaly.android.imdemo.home.fragment
 
+import android.arch.lifecycle.AndroidViewModel
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -17,9 +18,9 @@ abstract class BaseFragment : Fragment() {
     var baseView: View? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        initData()
         baseView = getView(inflater, container, savedInstanceState)
         initView(baseView)
+        initData()
         return baseView
     }
 
@@ -37,4 +38,9 @@ abstract class BaseFragment : Fragment() {
      * init view.
      */
     abstract fun initView(view: View?)
+
+    /**
+     * obtain ViewModel
+     */
+    abstract fun obtainViewModel(): AndroidViewModel
 }

@@ -4,6 +4,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.entity.chat.ChatMessageWrapper
+import wxgaly.android.imdemo.util.DateUtil
 
 /**
  *  wxgaly.android.imdemo.home.adapter.
@@ -17,8 +18,6 @@ class MessageListAdapter(resId: Int, data: List<ChatMessageWrapper>)
     override fun convert(helper: BaseViewHolder, item: ChatMessageWrapper) {
         helper.setText(R.id.message_tv_name, item.username)
                 .setText(R.id.message_tv_content, item.content)
-                .setText(R.id.message_tv_time, item.timestamp.toString())
+                .setText(R.id.message_tv_time, DateUtil.getTime(item.timestamp))
     }
-
-
 }

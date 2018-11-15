@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <!--<cn.jiguang.imui.messages.MessageList
             android:id="@+id/msg_list"
             android:layout_width="match_parent"
@@ -20,4 +28,4 @@
             app:sendTextSize="18sp"
             app:showReceiverDisplayName="true"
             app:showSenderDisplayName="false" />-->
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

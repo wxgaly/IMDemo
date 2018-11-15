@@ -7,7 +7,7 @@ package wxgaly.android.imdemo.entity.chat
  * @version V1.0
  */
 data class ChatMessageWrapper(
-        val head: String,
-        val username:String,
-        val content: String,
+        val head: String?,
+        val username:String?,
+        val content: String?,
         val timestamp: Long)

@@ -11,7 +11,7 @@ import wxgaly.android.imdemo.entity.chat.ChatConversation
 interface IConversation {
 
     interface OnMessageCompleteListener {
-        fun gotResult(code: Int, msg: String)
+        fun gotResult(code: Int, msg: String?)
     }
 
     fun getAllConversation(): List<ChatConversation>

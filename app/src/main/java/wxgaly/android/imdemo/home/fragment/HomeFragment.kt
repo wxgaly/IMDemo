@@ -1,5 +1,6 @@
 package wxgaly.android.imdemo.home.fragment
 
+import android.arch.lifecycle.AndroidViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +29,10 @@ class HomeFragment : BaseFragment() {
     companion object {
 
         fun newInstance() = HomeFragment()
+    }
+
+    override fun obtainViewModel(): AndroidViewModel {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 }

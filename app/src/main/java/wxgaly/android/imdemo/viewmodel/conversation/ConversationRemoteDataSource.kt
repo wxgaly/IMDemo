@@ -6,6 +6,7 @@ import cn.jpush.im.android.api.enums.ContentType
 import cn.jpush.im.android.api.enums.MessageDirect
 import cn.jpush.im.android.api.enums.MessageStatus
 import cn.jpush.im.android.api.model.Message
+import cn.jpush.im.api.BasicCallback
 import wxgaly.android.imdemo.entity.chat.ChatConversation
 
 /**
@@ -15,6 +16,8 @@ import wxgaly.android.imdemo.entity.chat.ChatConversation
  * @version V1.0
  */
 object ConversationRemoteDataSource : IConversation {
+
+    private val TAG = "ConversationRemoteDataSource"
 
     override fun getAllConversation(): List<ChatConversation> {
         val conversations = arrayListOf<ChatConversation>()
@@ -28,6 +31,10 @@ object ConversationRemoteDataSource : IConversation {
                 unReadMsgCnt = it.unReadMsgCnt
                 avatar = it.avatarFile
                 messages = convertAllMessage(it.allMessage)
+                lastMsgDate = it.lastMsgDate
+                latestText = it.latestText
+                latestType = convertContentType(it.latestType)
+                latestMessage = convertMessage(it.latestMessage)
             }
             conversations.add(chatConversation)
         }
@@ -48,13 +55,25 @@ object ConversationRemoteDataSource : IConversation {
             chatConversation.unReadMsgCnt = it.unReadMsgCnt
             chatConversation.avatar = it.avatarFile
             chatConversation.messages = convertAllMessage(it.allMessage)
+            chatConversation.lastMsgDate = it.lastMsgDate
+            chatConversation.latestText = it.latestText
+            chatConversation.latestType = convertContentType(it.latestType)
+            chatConversation.latestMessage = convertMessage(it.latestMessage)
         }
 
         return chatConversation
     }
 
     override fun sendSimpleTextMessage(id: String, content: String, listener: IConversation.OnMessageCompleteListener?) {
+        val textMessage = JMessageClient.createSingleTextMessage(id, content)
 
+        textMessage.setOnSendCompleteCallback(object : BasicCallback() {
+            override fun gotResult(code: Int, content: String?) {
+                listener?.gotResult(code, content)
+            }
+        })
+
+        JMessageClient.sendMessage(textMessage)
     }
 
     /**
@@ -64,16 +83,32 @@ object ConversationRemoteDataSource : IConversation {
         val chatMessages = arrayListOf<ChatConversation.Message>()
 
         messages?.forEach {
-            chatMessages.add(ChatConversation.Message(
+            convertMessage(it)?.let { message ->
+                chatMessages.add(message)
+            }
+
+        }
+
+        return chatMessages
+    }
+
+    /**
+     * convertMessage
+     */
+    private fun convertMessage(message: Message?): ChatConversation.Message? {
+
+        var chatMessage: ChatConversation.Message? = null
+        message?.let {
+            chatMessage = ChatConversation.Message(
                     it.id,
                     convertMessageType(it.direct),
                     convertMessageStatus(it.status),
                     convertMessageContent(it.content),
                     it.createTime
-            ))
+            )
         }
 
-        return chatMessages
+        return chatMessage
     }
 
     /**

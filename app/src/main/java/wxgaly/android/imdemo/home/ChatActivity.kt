@@ -1,7 +1,9 @@
 package wxgaly.android.imdemo.home
 
-import cn.jpush.im.android.api.JMessageClient
 import wxgaly.android.imdemo.BaseActivity
+import wxgaly.android.imdemo.util.obtainViewModel
+import wxgaly.android.imdemo.viewmodel.ViewModelType
+import wxgaly.android.imdemo.viewmodel.conversation.ConversationViewModel
 
 /**
  *  wxgaly.android.imdemo.home.
@@ -11,13 +13,14 @@ import wxgaly.android.imdemo.BaseActivity
  */
 class ChatActivity : BaseActivity() {
 
+
     //    private var messageListView: MessageList? = null
 //    private var messageAdapter: MsgListAdapter<ChatMessage>? = null
 
     override fun initData() {
-                val singleTextMessage = JMessageClient.createSingleTextMessage("wxgaly1", JMessageClient
-                .getMyInfo().appKey,
-                "你好吗？")
+//                val singleTextMessage = JMessageClient.createSingleTextMessage("wxgaly1", JMessageClient
+////                .getMyInfo().appKey,
+////                "你好吗？")
 //        singleTextMessage.setOnSendCompleteCallback(object : BasicCallback() {
 //            override fun gotResult(code: Int, msg: String?) {
 //                Logger.d(TAG, "消息发送 ：code is $code, msg is $msg")
@@ -30,7 +33,7 @@ class ChatActivity : BaseActivity() {
 //            messageListView = findViewById(R.id.msg_list)
 //
 //            var id: String? = null
-//            var conversation: Conversation? = null
+//            var conversation: ConversationViewModel? = null
 //            val messages = arrayListOf<ChatMessage>()
 //
 //            JMessageClient.getConversationList()?.forEach {
@@ -62,4 +65,8 @@ class ChatActivity : BaseActivity() {
 //            }
 //        }
     }
+
+    override fun obtainViewModel(): ConversationViewModel = obtainViewModel(ConversationViewModel::class.java,
+            ViewModelType.CONVERSATION_TYPE)
+
 }

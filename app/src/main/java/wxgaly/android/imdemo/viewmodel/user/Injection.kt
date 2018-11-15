@@ -1,10 +1,14 @@
 package wxgaly.android.imdemo.viewmodel.user
 
-import android.content.Context
+import wxgaly.android.imdemo.application.IMApplication
 import wxgaly.android.imdemo.login.UserInfoLocalDataSource
 import wxgaly.android.imdemo.login.UserInfoRemoteDataSource
 import wxgaly.android.imdemo.login.UserInfoRepository
+import wxgaly.android.imdemo.viewmodel.BaseRepository
 import wxgaly.android.imdemo.viewmodel.ViewModelType
+import wxgaly.android.imdemo.viewmodel.conversation.ConversationRemoteDataSource
+import wxgaly.android.imdemo.viewmodel.conversation.ConversationRepository
+import java.util.*
 
 /**
  *  wxgaly.android.imdemo.
@@ -14,16 +18,17 @@ import wxgaly.android.imdemo.viewmodel.ViewModelType
  */
 object Injection {
 
-    fun provideUserInfoRepository(context: Context) =
-            UserInfoRepository.getInstance(UserInfoRemoteDataSource,
-                    UserInfoLocalDataSource.getInstance(context))
+    fun provideRepositoryByType(type: ViewModelType): BaseRepository? = map[type]
 
-    fun provideRepositoryByType(context: Context, type: ViewModelType): Any = when (type) {
-        ViewModelType.USER_TYPE -> UserInfoRepository.getInstance(UserInfoRemoteDataSource,
-                UserInfoLocalDataSource.getInstance(context))
-        ViewModelType.CONVERSATION_TYPE ->
-        else -> {
-            throw IllegalArgumentException("Unknown ViewModelType : ${type.name}")
-        }
+    private val map = HashMap<ViewModelType, BaseRepository>()
+
+    init {
+        addRepository(UserInfoRepository.getInstance(UserInfoRemoteDataSource,
+                UserInfoLocalDataSource.getInstance(IMApplication.instance)))
+        addRepository(ConversationRepository.getInstance(ConversationRemoteDataSource))
+    }
+
+    private fun addRepository(repository: BaseRepository) {
+        map[repository.getViewModelType()] = repository
     }
 }

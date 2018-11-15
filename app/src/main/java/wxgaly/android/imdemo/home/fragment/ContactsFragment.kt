@@ -1,5 +1,6 @@
 package wxgaly.android.imdemo.home.fragment
 
+import android.arch.lifecycle.AndroidViewModel
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,10 @@ class ContactsFragment : BaseFragment() {
 
     override fun initView(view: View?) {
 
+    }
+
+    override fun obtainViewModel(): AndroidViewModel {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     companion object {

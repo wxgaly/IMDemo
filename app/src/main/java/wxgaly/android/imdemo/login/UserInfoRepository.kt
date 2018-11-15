@@ -2,6 +2,8 @@ package wxgaly.android.imdemo.login
 
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
+import wxgaly.android.imdemo.viewmodel.BaseRepository
+import wxgaly.android.imdemo.viewmodel.ViewModelType
 
 /**
  *  wxgaly.android.imdemo.login.
@@ -10,9 +12,11 @@ import wxgaly.android.imdemo.entity.UserInfo
  * @version V1.0
  */
 class UserInfoRepository(
-        val userInfoLocalDataSource: UserInfoLocalDataSource,
-        val userInfoRemoteDataSource: UserInfoRemoteDataSource
-) : IUserInfo, IUserInfo.UserInfoStateCallback {
+        private val userInfoLocalDataSource: UserInfoLocalDataSource,
+        private val userInfoRemoteDataSource: UserInfoRemoteDataSource
+) : IUserInfo, IUserInfo.UserInfoStateCallback, BaseRepository() {
+
+    override fun getViewModelType(): ViewModelType = ViewModelType.USER_TYPE
 
     override fun login(user: UserInfo, callback: IUserInfo.UserInfoCallback?) {
         userInfoRemoteDataSource.login(user, callback)
