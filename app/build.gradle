@@ -86,7 +86,7 @@ dependencies {
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    compile("com.github.hotchemi:permissionsdispatcher:3.3.1") {
+    implementation("com.github.hotchemi:permissionsdispatcher:3.3.1") {
         // if you don't use android.app.Fragment you can exclude support for them
         exclude module: "support-v13"
     }
