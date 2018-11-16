@@ -73,6 +73,8 @@ dependencies {
 
     // 极光开源 messagelist
     implementation 'cn.jiguang.imui:messagelist:0.7.4'
+    // 极光开源 ChatInput
+    implementation 'cn.jiguang.imui:chatinput:0.9.1'
 
     implementation 'com.github.dmytrodanylyk.android-process-button:library:1.0.4'
 

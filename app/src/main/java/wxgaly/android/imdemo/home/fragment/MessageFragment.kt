@@ -1,5 +1,6 @@
 package wxgaly.android.imdemo.home.fragment
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,8 +11,8 @@ import android.view.ViewGroup
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.databinding.FragMessageBinding
 import wxgaly.android.imdemo.entity.chat.ChatMessageWrapper
+import wxgaly.android.imdemo.home.ChatActivity
 import wxgaly.android.imdemo.home.adapter.MessageListAdapter
-import wxgaly.android.imdemo.util.Logger
 import wxgaly.android.imdemo.util.obtainViewModel
 import wxgaly.android.imdemo.viewmodel.ViewModelType
 import wxgaly.android.imdemo.viewmodel.conversation.ConversationViewModel
@@ -67,10 +68,14 @@ class MessageFragment : BaseFragment() {
             }
 
             adapter.setOnItemClickListener { adapter, view, position ->
-                Logger.d(TAG, "$position")
+                startChatActivity(position)
             }
 
         }
+    }
+
+    private fun startChatActivity(position: Int) {
+        startActivity(Intent(activity, ChatActivity::class.java))
     }
 
     override fun obtainViewModel(): ConversationViewModel = obtainViewModel(ConversationViewModel::class.java, ViewModelType.CONVERSATION_TYPE)

@@ -22,6 +22,7 @@ import wxgaly.android.imdemo.home.fragment.MessageFragment
  */
 class HomeActivity : AppCompatActivity() {
 
+    private val TAG = "HomeActivity"
     private var mFragments = ArrayList<Fragment>()
     private lateinit var homeFragmentAdapter: HomeFragmentAdapter
 

@@ -18,6 +18,7 @@
 
     <!-- 消息页面 -->
     <string name="frag_message">消息</string>
+    <string name="chat_input_hint">请输入</string>
 
     <!-- 联系人 -->
     <string name="frag_contacts">好友</string>

@@ -30,7 +30,7 @@ object IMConstant {
         /**
          * 启动时长
          */
-        const val DURATION = 2 * 1000L
+        const val DURATION = 1 * 1000L
     }
 
 

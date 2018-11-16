@@ -1,9 +1,10 @@
-package wxgaly.android.imdemo
+package wxgaly.android.imdemo.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v7.app.AppCompatActivity
+import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.constant.IMConstant
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
@@ -44,7 +45,8 @@ class LaunchActivity : AppCompatActivity() {
             override fun onUserInfoLoaded(users: List<UserInfo>) {
                 if (!users.isEmpty()) {
                     if (users[0].loginType == IMConstant.LoginType.LOGIN.ordinal) {
-                        startHomeActivity()
+//                        startHomeActivity()
+                        startMainActivity()
                     }
                 }
             }

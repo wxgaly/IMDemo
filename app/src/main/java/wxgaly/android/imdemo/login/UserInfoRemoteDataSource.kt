@@ -14,7 +14,6 @@ import wxgaly.android.imdemo.entity.UserInfo
  */
 object UserInfoRemoteDataSource : IUserInfo, IUserInfo.UserInfoStateCallback {
 
-
     private const val SERVICE_LATENCY_IN_MILLIS = 5000L
 
     private var USERINFO_SERVICE_DATA = LinkedHashMap<String, UserInfo>(2)

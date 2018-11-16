@@ -1,4 +1,4 @@
-package wxgaly.android.imdemo
+package wxgaly.android.imdemo.util
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.MutableLiveData

@@ -1,4 +1,4 @@
-package wxgaly.android.imdemo
+package wxgaly.android.imdemo.activity
 
 import android.arch.lifecycle.AndroidViewModel
 import android.os.Bundle

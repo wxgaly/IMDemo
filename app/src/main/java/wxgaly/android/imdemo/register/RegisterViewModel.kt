@@ -8,7 +8,7 @@ import android.text.TextUtils
 import android.view.View
 import com.dd.processbutton.iml.ActionProcessButton
 import wxgaly.android.imdemo.R
-import wxgaly.android.imdemo.SingleLiveEvent
+import wxgaly.android.imdemo.util.SingleLiveEvent
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 import wxgaly.android.imdemo.login.UserInfoActionListener

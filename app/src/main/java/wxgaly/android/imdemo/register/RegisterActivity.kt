@@ -3,7 +3,7 @@ package wxgaly.android.imdemo.register
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import wxgaly.android.imdemo.BaseActivity
+import wxgaly.android.imdemo.activity.BaseActivity
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.databinding.ActivityRegisterBinding
 import wxgaly.android.imdemo.util.obtainViewModel

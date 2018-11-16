@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:background="@mipmap/bg"
         android:fitsSystemWindows="true"
-        tools:context="wxgaly.android.imdemo.MainActivity">
+        tools:context="wxgaly.android.imdemo.activity.MainActivity">
 
         <TextView
             android:layout_width="match_parent"

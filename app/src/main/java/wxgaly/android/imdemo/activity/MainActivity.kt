@@ -1,4 +1,4 @@
-package wxgaly.android.imdemo
+package wxgaly.android.imdemo.activity
 
 import android.Manifest
 import android.arch.lifecycle.Observer
@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil
 import permissions.dispatcher.NeedsPermission
 import permissions.dispatcher.OnPermissionDenied
 import permissions.dispatcher.RuntimePermissions
+import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.databinding.ActivityMainBinding
 import wxgaly.android.imdemo.login.UserViewModel
 import wxgaly.android.imdemo.register.RegisterActivity

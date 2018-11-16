@@ -1,7 +1,5 @@
 package wxgaly.android.imdemo.entity
 
-import android.view.View
-
 
 /**
  *  wxgaly.android.imdemo.entity.
@@ -32,7 +30,7 @@ interface IUserInfo {
     }
 
     interface UserInfoCallback {
-        fun getResult(code : Int, message : String?)
+        fun getResult(code: Int, message: String?)
     }
 
     fun getUserInfos(callback: LoadUserInfoCallback?)

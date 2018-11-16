@@ -1,7 +1,6 @@
 package wxgaly.android.imdemo.login
 
 import android.content.Context
-import wxgaly.android.imdemo.entity.DaoManager
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 import wxgaly.android.imdemo.entity.UserInfoUtils

@@ -39,7 +39,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/theme_no_title">
-        <activity android:name=".LaunchActivity">
+        <activity android:name=".activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -48,7 +48,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:windowSoftInputMode="stateVisible|adjustResize">
 
         </activity>
@@ -57,7 +57,9 @@
 
         </activity>
         <activity android:name=".register.RegisterActivity"/>
-        <activity android:name=".home.ChatActivity"/>
+        <activity
+            android:name=".home.ChatActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
         <!-- Required SDK 核心功能-->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
