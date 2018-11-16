@@ -10,6 +10,7 @@ import android.view.View
 import com.dd.processbutton.iml.ActionProcessButton
 import wxgaly.android.imdemo.R
 import wxgaly.android.imdemo.SingleLiveEvent
+import wxgaly.android.imdemo.constant.IMConstant
 import wxgaly.android.imdemo.entity.IUserInfo
 import wxgaly.android.imdemo.entity.UserInfo
 import wxgaly.android.imdemo.home.HomeActivity
@@ -43,7 +44,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
                         view.progress = 100
                         ToastUtils.showToastShort(getApplication(),
                                 "${context.resources.getString(R.string.login_success)}$message")
-                        user.loginType = 1
+                        user.loginType = IMConstant.LoginType.LOGIN.ordinal
                         userInfoRepository.saveUserInfo(user)
                         val intent = Intent(context, HomeActivity::class.java).apply {
                             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -101,6 +102,7 @@ class UserViewModel(context: Application, private val userInfoRepository: UserIn
                         this@UserViewModel.password.set(password)
                     }
                 }
+                callback?.onUserInfoLoaded(users)
             }
 
             override fun onDataNotAvailable() {

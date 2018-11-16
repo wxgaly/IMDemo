@@ -23,7 +23,16 @@ object IMConstant {
     }
 
     enum class LoginType {
-        LOGIN, LOGOUT, NOT_LOGIN
+        LOGOUT, LOGIN, NOT_LOGIN
     }
+
+    object ActivityConstant {
+        /**
+         * 启动时长
+         */
+        const val DURATION = 2 * 1000L
+    }
+
+
 }
 
